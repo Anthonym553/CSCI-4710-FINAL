@@ -34,21 +34,36 @@
  }
  // Function to update the snake's position
  document.addEventListener("keydown", (event) => {
-    switch (event.key) {
-      case 37: // left arrow
-        direction = "left";
-        break;
-      case 38: // up arrow
-        direction = "up";
-        break;
-      case 39: // right arrow
-        direction = "right";
-        break;
-      case 40: // down arrow
-        direction = "down";
-        break;
-    }
-  });
+  switch (event.key) {
+    case "a": // left 
+      direction = "left";
+      break;
+    case 37: // left arrow
+      direction = "left";
+      break;
+
+    case "w": // up 
+      direction = "up";
+      break;
+    case 38: // up arrow
+      direction = "up";
+      break;
+
+    case "d": // right 
+      direction = "right";
+      break;
+    case 39: // right arrow
+      direction = "right";
+      break;
+
+    case "s": // down 
+      direction = "down";
+      break;
+    case 40: // down arrow
+      direction = "down";
+      break;
+  }
+});
 
  // Function to update the snake's position
  function move() {

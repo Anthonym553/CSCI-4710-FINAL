@@ -45,46 +45,42 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script>
-      const supabaseUrl = "https://ddmreiaxkuqwihdhgxcv.supabase.co";
-      const supabaseKey =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRkbXJlaWF4a3Vxd2loZGhneGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODMwNDc1MTksImV4cCI6MTk5ODYyMzUxOX0.S5BrI67ZpWvFVrjzTuJdbuwllAHQXh8SMvfDn8ua3uc";
-      const supabase = createClient(supabaseUrl, supabaseKey);
-
-      const userList = document.getElementById("user-list");
-
-      supabase
-        .from("leaderboards")
-        .select("player_name, score")
-        .order("score", { ascending: false })
-        .then(({ data: users, error }) => {
-          if (error) {
-            console.error(error);
-            return;
-          }
-
-          users.forEach((user) => {
-            const row = document.createElement("tr");
-            const nameCell = document.createElement("td");
-            const scoreCell = document.createElement("td");
-            const name = document.createElement("h5");
-            const score = document.createElement("h4");
-            const scoreColor = document.createElement("small");
-
-            name.innerText = user.player_name;
-            score.innerText = user.score;
-            scoreColor.innerText = " points";
-            scoreColor.classList.add("text-success");
-
-            nameCell.appendChild(name);
-            scoreCell.appendChild(score);
-            scoreCell.appendChild(scoreColor);
-            row.appendChild(nameCell);
-            row.appendChild(scoreCell);
-            userList.appendChild(row);
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+      // import { getFirestore } from "https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDrfQJbCZ5LvcKDKbf_E1YIdSQeDFK4emY",
+        authDomain: "snake-a08fa.firebaseapp.com",
+        projectId: "snake-a08fa",
+        storageBucket: "snake-a08fa.appspot.com",
+        messagingSenderId: "589455344205",
+        appId: "1:589455344205:web:9f50e60ea419f9a6861204"
+      };
+      console.log("test");
+      // Initialize Firebase
+      const app = firebase.initializeApp(firebaseConfig);
+      console.log("test");
+      const db = firebase.firestore(app);
+      console.log(db);
+      db.collection("leaderboard").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log(doc.data());
+          const userRow = document.createElement('tr');
+          userRow.innerHTML = `
+          <td>${doc.data()["name"]}</td>
+          <td>${doc.data()["score"]}</td>
+        `;
+        document.getElementById('user-list').appendChild(userRow);
           });
-        });
+      });
+      
     </script>
   </body>
 </html>

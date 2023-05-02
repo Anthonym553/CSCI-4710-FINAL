@@ -9,6 +9,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+  <style>
+    .green-bg {
+      background-color: green;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -16,6 +22,33 @@
     <ul>
         <li><a href="/templates/snake.html" style="font-size: xx-large;">Begin Game</a></li>
     </ul>
+    <div id="accordion">
+      <h3>Anthony Miranda</h3>
+      <div>
+        <p>mirandaj20@students.ecu.edu</p>
+      </div>
+      <h3>Cameron Sabiston</h3>
+      <div>
+        <p>sabistonc20@students.ecu.edu</p>
+      </div>
+      <h3>Nick Terrell</h3>
+      <div>
+        <p>terrelln19@students.ecu.edu</p>
+      </div>
+    </div>
   </div>
+
+  <!-- add the following script tags to load jQuery and jQuery UI -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+  <script>
+    // add the following JavaScript code to initialize the accordion
+    $(document).ready(function() {
+      $("#accordion").accordion({
+        heightStyle: "content",
+        collapsible: true
+      });
+    });
+  </script>
 </body>
 </html>

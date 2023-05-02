@@ -63,24 +63,27 @@
         messagingSenderId: "589455344205",
         appId: "1:589455344205:web:9f50e60ea419f9a6861204"
       };
-      console.log("test");
       // Initialize Firebase
       const app = firebase.initializeApp(firebaseConfig);
-      console.log("test");
+      
       const db = firebase.firestore(app);
-      console.log(db);
+      let array = []; 
       db.collection("leaderboard").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          console.log(doc.data());
+          array.push({"name": doc.data()["name"], "score": doc.data()["score"]});
+        });
+        array.sort((a, b) => b.score - a.score);
+        let array2 = array.slice(0, 10);
+        console.log(array);
+        array2.forEach((user) => {
           const userRow = document.createElement('tr');
           userRow.innerHTML = `
-          <td>${doc.data()["name"]}</td>
-          <td>${doc.data()["score"]}</td>
+          <td>${user.name}</td>
+          <td>${user.score}</td>
         `;
         document.getElementById('user-list').appendChild(userRow);
-          });
+        });
       });
-      
     </script>
   </body>
 </html>

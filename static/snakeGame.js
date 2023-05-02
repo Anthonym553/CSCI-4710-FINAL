@@ -1,4 +1,4 @@
- // Get the canvas element and its context
+// Get the canvas element and its context
  const canvas = document.getElementById("game-board");
  const ctx = canvas.getContext("2d");
 

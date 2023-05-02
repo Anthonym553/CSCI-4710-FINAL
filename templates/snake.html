@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <script
         src="{{ url_for('static', filename='js/snakeGame.js') }}"
         type="module"
@@ -8,11 +9,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Snake Game</title>
     <style>
+    body {
+        background-image: url('../static/css/background.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
     canvas {
         border: 1px solid #ccc;
       }
     button {
         margin-right: 10px;
+        }
+    .container {
+        max-height: 100vh;
         }
     </style>
   </head>
@@ -20,10 +29,11 @@
     <div id="scoreText"></div>
     <canvas id="game-board" width="400" height="400"></canvas>
     <div>
-        <button id="start">Start</button>
-        <button id="pause">Pause</button>
-        <button id="resume">Resume</button>
-        <button id="restart">Restart</button>
+      <button id="start">Start</button>
+      <button id="pause">Pause</button>
+      <button id="resume">Resume</button>
+      <button id="restart">Restart</button>
+      <button id="leaderboard" onclick="window.location.href='leaderboard.html'">Leaderboard</button>
     </div>
   </body>
   <script src="snakeGame.js"></script>

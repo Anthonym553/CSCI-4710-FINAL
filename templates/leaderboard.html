@@ -1,106 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Leaderboard</title>
-	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="../static/css/leaderboard.css">
-</head>
-<body>
-	<section class="main-content">
-		<div class="container">
-			<h1 style="color: #1eff4f;">Top Players</h1>
-			<br>
-			<br>
-			<h4 style="color: #1eff4f;">All Users</h4>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Leaderboard</title>
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+      name="viewport"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../static/css/leaderboard.css"
+    />
+  </head>
+  <body>
+    <section class="main-content">
+      <div class="container">
+        <h1 style="color: #1eff4f">Top Players</h1>
+        <br />
+        <br />
+        <h4 style="color: #1eff4f">All Users</h4>
 
-			<table class="table">
-				<thead>
-					<tr>
-						<th style="color:#1eff4f;">User</th>
-						<th style="color: #1eff4f;">Score</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<div class="d-flex align-items-center">
-								<div class="user-info__basic">
-									<h5 class="mb-0">AAA</h5>
-								</div>
-							</div>
-						</td>
-						<td>
-							<div class="d-flex align-items-baseline">
-								<h4 class="mr-1">32</h4><small class="text-success">
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="d-flex align-items-center">
-								<div class="user-info__basic">
-									<h5 class="mb-0">BBB</h5>
-								</div>
-							</div>
-						</td>
-						<td>
-							<div class="d-flex align-items-baseline">
-								<h4 class="mr-1">23</h4><small class="text-success">
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="d-flex align-items-center">
-								<div class="user-info__basic">
-									<h5 class="mb-0">CCC</h5>
-								</div>
-							</div>
-						</td>
-						<td>
-							<div class="d-flex align-items-baseline">
-								<h4 class="mr-1">17</h4><small class="text-success">
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="d-flex align-items-center">
-								<div class="user-info__basic">
-									<h5 class="mb-0">DDD</h5>
-								</div>
-							</div>
-						</td>
-						<td>
-							<div class="d-flex align-items-baseline">
-								<h4 class="mr-1">8</h4><small class="text-success">
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="d-flex align-items-center">
-								<div class="user-info__basic">
-									<h5 class="mb-0">EEE</h5>
-								</div>
-							</div>
-						</td>
-						<td>
-							<div class="d-flex align-items-baseline">
-								<h4 class="mr-1">2</h4><small class="text-success">
-							</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</section>
-	
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</body>
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="color: #1eff4f">User</th>
+              <th style="color: #1eff4f">Score</th>
+            </tr>
+          </thead>
+          <tbody id="user-list"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script>
+      const supabaseUrl = "https://ddmreiaxkuqwihdhgxcv.supabase.co";
+      const supabaseKey =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRkbXJlaWF4a3Vxd2loZGhneGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODMwNDc1MTksImV4cCI6MTk5ODYyMzUxOX0.S5BrI67ZpWvFVrjzTuJdbuwllAHQXh8SMvfDn8ua3uc";
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      const userList = document.getElementById("user-list");
+
+      supabase
+        .from("leaderboards")
+        .select("player_name, score")
+        .order("score", { ascending: false })
+        .then(({ data: users, error }) => {
+          if (error) {
+            console.error(error);
+            return;
+          }
+
+          users.forEach((user) => {
+            const row = document.createElement("tr");
+            const nameCell = document.createElement("td");
+            const scoreCell = document.createElement("td");
+            const name = document.createElement("h5");
+            const score = document.createElement("h4");
+            const scoreColor = document.createElement("small");
+
+            name.innerText = user.player_name;
+            score.innerText = user.score;
+            scoreColor.innerText = " points";
+            scoreColor.classList.add("text-success");
+
+            nameCell.appendChild(name);
+            scoreCell.appendChild(score);
+            scoreCell.appendChild(scoreColor);
+            row.appendChild(nameCell);
+            row.appendChild(scoreCell);
+            userList.appendChild(row);
+          });
+        });
+    </script>
+  </body>
 </html>

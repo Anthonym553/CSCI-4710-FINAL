@@ -9,7 +9,7 @@
   }
   
   body{
-    background-image: url(background.png);
+    background-image: url(/static/background.png);
     font-family: 'Press Start 2P', cursive;
     line-height: 10;
     color: #fff;

@@ -35,7 +35,7 @@
     <div id="scoreText"></div>
     <canvas id="game-board" width="400" height="400"></canvas>
     <div>
-      <button id="restart">Restart</button>
+      <button id="restart" onclick="window.location.href='snake.html'">Restart</button>
       <button
         id="leaderboard"
         onclick="window.location.href='leaderboard.html'"
@@ -88,7 +88,7 @@
       ctx.fillText("Score: " + score, 10, canvas.height - 10);
 
       // Update the score
-      scoreText.innerHTML = "Score: " + score;
+      // scoreText.innerHTML = "Score: " + score;
 
       // Draw the snake
       ctx.fillStyle = "#333";
@@ -186,24 +186,7 @@
         head.y >= canvas.height / gridSize
       ) {
         let player = prompt("Game Over! Enter your 3 character name: ");
-        db.collection("leaderboard")
-          .doc()
-          .set({
-            name: player,
-            score: score,
-          })
-          .then(() => {
-            console.log("Document successfully written!");
-          });
-        score = 0;
-        clearInterval(gameLoop);
-        return;
-      }
-
-      // Check for collision with the snake's tail
-      for (let i = 1; i < snake.length; i++) {
-        if (head.x === snake[i].x && head.y === snake[i].y) {
-          let player = prompt("Game Over! Enter your 3 character name: ");
+        if (player != null) {
           db.collection("leaderboard")
             .doc()
             .set({
@@ -213,6 +196,27 @@
             .then(() => {
               console.log("Document successfully written!");
             });
+        }
+        score = 0;
+        clearInterval(gameLoop);
+        return;
+      }
+
+      // Check for collision with the snake's tail
+      for (let i = 1; i < snake.length; i++) {
+        if (head.x === snake[i].x && head.y === snake[i].y) {
+          let player = prompt("Game Over! Enter your 3 character name: ");
+          if (player != null) {
+          db.collection("leaderboard")
+            .doc()
+            .set({
+              name: player,
+              score: score,
+            })
+            .then(() => {
+              console.log("Document successfully written!");
+            });
+        }
           score = 0;
           clearInterval(gameLoop);
           return;
